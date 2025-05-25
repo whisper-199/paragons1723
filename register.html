@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register | Paragons 2023</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      .register-container {
+        width: min(90vw, 500px);
+        margin: 40px auto;
+        background: rgba(255,255,255,0.12);
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+        backdrop-filter: blur(8px);
+        padding: 2.5rem 2rem 2rem 2rem;
+        color: #fff;
+      }
+      .register-container h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+        color: #FFD700;
+        text-shadow: 0 0 8px #003366;
+      }
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.4rem;
+        font-weight: 600;
+        color: #fff;
+      }
+      .form-group input[type="text"],
+      .form-group input[type="email"],
+      .form-group input[type="password"],
+      .form-group input[type="file"],
+      .form-group textarea {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        border-radius: 8px;
+        border: 1px solid #fff3;
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+        font-size: 1rem;
+        outline: none;
+        margin-top: 0.2rem;
+        margin-bottom: 0.2rem;
+        transition: border 0.2s;
+      }
+      .form-group input[type="file"] {
+        background: none;
+        color: #fff;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border: 1.5px solid #FFD700;
+      }
+      .register-btn {
+        width: 100%;
+        padding: 0.9rem;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #003366 60%, #FFD700 100%);
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        cursor: pointer;
+        margin-top: 1rem;
+        transition: background 0.2s;
+      }
+      .register-btn:hover {
+        background: linear-gradient(90deg, #FFD700 10%, #003366 100%);
+        color: #003366;
+      }
+      #profile-message {
+        text-align: center;
+        margin-top: 1rem;
+        font-weight: bold;
+        color: #FFD700;
+      }
+      .login-link {
+        display: block;
+        text-align: center;
+        margin-top: 1.5rem;
+        color: #FFD700;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .login-link:hover {
+        text-decoration: underline;
+        color: #fff;
+      }
+      .logout-btn {
+        padding: 0.7rem 1.2rem;
+        border: none;
+        border-radius: 8px;
+        background: #ff4d4d;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .logout-btn:hover {
+        background: #ff1a1a;
+      }
+    </style>
+</head>
+<body>
+  <div class="register-container">
+    <h2><i class="fa-solid fa-user-plus"></i> Create Your Profile</h2>
+    <button id="logout-button" class="logout-btn" style="float:right; margin-bottom:10px; display:none;">Logout</button>
+    <form id="profile-form" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="full-name">Full Name</label>
+        <input type="text" id="full-name" required placeholder="Your full name">
+      </div>
+      <div class="form-group">
+        <label for="bio">Bio</label>
+        <textarea id="bio" rows="2" placeholder="Tell us about yourself"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="hobbies">Hobbies</label>
+        <input type="text" id="hobbies" placeholder="e.g. Reading, Coding">
+      </div>
+      <div class="form-group">
+        <label for="whatsapp">WhatsApp Number</label>
+        <input type="text" id="whatsapp" placeholder="e.g. 2567xxxxxxx">
+      </div>
+      <div class="form-group">
+        <label for="instagram">Instagram</label>
+        <input type="text" id="instagram" placeholder="e.g. username or @username">
+      </div>
+      <div class="form-group">
+        <label for="twitter">Twitter</label>
+        <input type="text" id="twitter" placeholder="e.g. username or @username">
+      </div>
+      <div class="form-group">
+        <label for="photo-file">Upload Photo</label>
+        <input type="file" id="photo-file" accept="image/*">
+      </div>
+      <img id="photo-preview" src="" alt="Preview" style="display:none;max-width:120px;border-radius:8px;margin-top:10px;">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required placeholder="Enter your email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required placeholder="Create a password">
+      </div>
+      <button type="submit" class="register-btn">Save Profile</button>
+      <div id="profile-message"></div>
+    </form>
+    <a class="login-link" href="login.html">Already have an account? Login</a>
+  </div>
+  <script>
+    document.getElementById('profile-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // 1. Register the user
+      fetch('http://localhost:3000/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              email: document.getElementById('email').value,
+              password: document.getElementById('password').value
+          })
+      })
+      .then(res => res.json())
+      .then(data => {
+          // 2. Log the user in to get the token
+          return fetch('http://localhost:3000/api/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                  email: document.getElementById('email').value,
+                  password: document.getElementById('password').value
+              })
+          });
+      })
+      .then(res => res.json())
+      .then(data => {
+          if (!data.token) throw new Error('Login failed');
+          localStorage.setItem('token', data.token);
+
+          // 3. Prepare profile data
+          const reader = new FileReader();
+          const fileInput = document.getElementById('photo-file');
+          const file = fileInput.files[0];
+
+          function sendProfile(profile) {
+              fetch('http://localhost:3000/api/profiles', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + localStorage.getItem('token')
+                  },
+                  body: JSON.stringify(profile)
+              })
+              .then(res => res.json())
+              .then(data => {
+                  document.getElementById('profile-message').textContent = 'Profile saved!';
+                  setTimeout(() => window.location.href = 'index.html', 1000);
+              })
+              .catch(() => {
+                  document.getElementById('profile-message').textContent = 'Error saving profile!';
+              });
+          }
+
+          if (file) {
+              reader.onload = function(event) {
+                  const profile = {
+                      fullName: document.getElementById('full-name').value,
+                      bio: document.getElementById('bio').value,
+                      hobbies: document.getElementById('hobbies').value,
+                      whatsapp: document.getElementById('whatsapp').value,
+                      instagram: document.getElementById('instagram').value,
+                      twitter: document.getElementById('twitter').value,
+                      photo: event.target.result
+                  };
+                  sendProfile(profile);
+              };
+              reader.readAsDataURL(file);
+          } else {
+              const profile = {
+                  fullName: document.getElementById('full-name').value,
+                  bio: document.getElementById('bio').value,
+                  hobbies: document.getElementById('hobbies').value,
+                  whatsapp: document.getElementById('whatsapp').value,
+                  instagram: document.getElementById('instagram').value,
+                  twitter: document.getElementById('twitter').value,
+                  photo: ''
+              };
+              sendProfile(profile);
+          }
+      })
+      .catch(() => {
+          document.getElementById('profile-message').textContent = 'Registration or login failed!';
+      });
+    });
+
+    // Logout functionality
+    document.getElementById('logout-button').addEventListener('click', function() {
+      localStorage.removeItem('token');
+      document.getElementById('logout-button').style.display = 'none';
+      document.getElementById('profile-message').textContent = 'Logged out successfully!';
+      setTimeout(() => window.location.href = 'login.html', 1000);
+    });
+
+    // Check if user is already logged in
+    window.addEventListener('load', function() {
+      const token = localStorage.getItem('token');
+      if (token) {
+          document.getElementById('logout-button').style.display = 'block';
+          document.getElementById('profile-message').textContent = 'You are already logged in!';
+      }
+    });
+
+    // Show logout button if logged in
+    if (localStorage.getItem('token')) {
+      document.getElementById('logout-button').style.display = 'block';
+      document.getElementById('logout-button').onclick = function() {
+        localStorage.removeItem('token');
+        window.location.href = 'login.html';
+      };
+    }
+
+    document.getElementById('photo-file').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const preview = document.getElementById('photo-preview');
+          preview.src = evt.target.result;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>

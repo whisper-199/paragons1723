@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gallery</title>
+	<link rel="stylesheet" href="styles.css">
+	
+</head>
+
+<body>
+	<nav class="nav-bar">
+
+	</nav>
+<div class="main-div">
+	<div class="left-div">
+<p class="text">PARAGONS<br> 2023</p>
+<P class="smaller-text">New Gallery</P>
+	</div>
+	<div class="right-div">
+		<div class="right-div-a">
+			<div class="right-div-a-1 zoom-effect">
+
+			</div>
+			<div class="right-div-a-2 zoom-effect">
+
+			</div>
+		</div>
+		<div class="right-div-b">
+			<div class="right-div-b-1 zoom-effect">
+
+			</div>
+			<div class="right-div-b-2 zoom-effect">
+
+			</div>
+		</div>
+		<div class="right-div-c zoom-effect">
+
+		</div>	
+	</div>
+</div>	
+
+<hr>
+<hr>
+
+<div class="lower-div">
+	<div class="bigger-right-div">
+		<div class="top-div">
+			<div class="top-div-1"></div>
+			<div class="top-div-2"></div>
+			<div class="top-div-3"></div>
+		</div>
+
+		<div class="bottom-div">
+			<div class="bottom-div-1"></div>
+			<div class="bottom-div-2"></div>
+			<div class="bottom-div-3"></div>
+		</div>
+
+	</div>
+</div>
+<div class="lower-div-2">
+    <div>
+    
+  <video autoplay muted loop playsinline id="anita-video">
+    <source src="photos/anitaedith-vid.mp4" type="video/mp4">
+  </video>
+ 
+</div>
+    <div></div>
+</div>
+<hr>
+<div class="lower-div-3">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<div class="last-div-containing-copyright"></div>
+
+<button id="logout-button" class="logout-btn" style="display:none;">Logout</button>
+
+<script>
+if (!localStorage.getItem('token')) {
+    window.location.href = 'login.html';
+} else {
+    document.getElementById('logout-button').style.display = 'block';
+    document.getElementById('logout-button').onclick = function() {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    };
+}
+</script>
+</body>
+</html>
+
