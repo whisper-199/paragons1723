@@ -12,10 +12,11 @@ app.use(express.static(__dirname));
 
 // Configure your MySQL connection
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Vocational200.', // your MySQL password
-    database: 'paragons'
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
+    port: process.env.MYSQLPORT
 });
 
 // Create table if not exists (updated fields)
