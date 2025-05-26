@@ -122,3 +122,5 @@ if (document.querySelector('button[onclick*="saveProfile"]') && typeof window.sa
         alert('Profile save function is not available on this page.');
     };
 }
+
+fetch('https://paragons1723-production.up.railway.app/api/register', ...)

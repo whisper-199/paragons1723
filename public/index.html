@@ -403,7 +403,7 @@ if (!localStorage.getItem('token')) {
 window.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('profileCardsContainer');
     if (!container) return;
-    fetch('https://your-app.up.railway.app/api/profiles')
+    fetch('https://paragons1723-production.up.railway.app/api/register')
         .then(res => res.json())
         .then(profiles => {
             profiles.forEach(profile => {
