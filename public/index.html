@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <script src="app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARAGONS 2017-2023</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">PARAGONS 2023</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="login.html" id="login">Login</a></li>
+                </ul>  
+            </nav>  
+        </div>
+        <h1>PARAGONS 2017-2023</h1>
+        <input type="text" id="searchInput" placeholder="Search by name..." onkeyup="searchCards()">
+    </header>
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1>Welcome to the Paragons Family</h1>
+        <p>Connecting friends, sharing memories, and celebrating our journey together.</p>
+      </div>
+    </div>
+    <div class="container" id="cardContainer">
+
+        <div class="card" data-name="Sulphyne">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/sulphyne-1.jpg" alt="Sulphyne">
+                </div>
+                <div class="back">
+                    <h3>Sulphyne</h3>
+                    <p>Hobbies: Reading, Writing, Adding commas to her money</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256761319412" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" data-name="Alan">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/Alan.jpg" alt="Alan">
+                </div>
+                <div class="back">
+                    <h3>Alan</h3>
+                    <p>Hobbies: Playing FIFA2025, EFOOTBALL, Fashion, Listening to music</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256770725060" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" data-name="Comfort">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/Comfort.jpg" alt="Comfort">
+                </div>
+                <div class="back">
+                    <h3>Comfort</h3>
+                    <p>Hobbies: Football, Music, Trips, Dancing</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256771750214" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" data-name="Ederbert">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/eddy.jpg" alt="Ederbert">
+                </div>
+                <div class="back">
+                    <h3>Ederbert</h3>
+                    <p>Hobbies: Football, Music, Partying</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256777865815" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" data-name="Comfort Icom">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/comfort-Icom.jpg" alt="Comfort Icom">
+                </div>
+                <div class="back">
+                    <h3>Comfort Icom</h3>
+                    <p>Hobbies: Fashion</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256787406593" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" data-name="DISMAS">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/DISMAS.jpg" alt="DISMAS">
+                </div>
+                <div class="back">
+                    <h3>DISMAS</h3>
+                    <p>Hobbies: Music, Reading, Fashion</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256705194758" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://www.instagram.com/mumberedismas?igsh=YzljYTk1ODg3Zg==" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" data-name="Dan Kyathumba">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/Dankyathumba-1.jpg" alt="Dan Kyathumba">
+                </div>
+                <div class="back">
+                    <h3>Dan Gilbert</h3>
+                    <p>Hobbies: Football, Music, Dancing</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256771667669" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" data-name="Philip Arts">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/PhilipArts.jpg" alt="Philip Arts">
+                </div>
+                <div class="back">
+                    <h3>Philip Arts</h3>
+                    <p>Hobbies: Debating, Art, Painting</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256784245430" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" data-name="Frank Praise">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/FrankPraise.jpg" alt="Frank Praise">
+                </div>
+                <div class="back">
+                    <h3>Frank Praise</h3>
+                    <p>Hobbies: Coming soon</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/#" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" data-name="Fred TSO">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/fredtso.jpg" alt="#TSO.M">
+                </div>
+                <div class="back">
+                    <h3>Fred TSO.M</h3>
+                    <p>Hobbies: Performing miracles</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256783372449" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-name="ANITA EDITH">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/anitaedith.jpg" alt="MAE">
+                </div>
+                <div class="back">
+                    <h3>ANITA EDITH</h3>
+                    <p>Hobbies:Music, listening to music and Reading </p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256707766987" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <div class="card" data-name="KIKENGE">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/hiv.jpg" alt="GORDON">
+                </div>
+                <div class="back">
+                    <h3>KIKENGE</h3>
+                    <p>Hobbies:football </p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256707766987" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-name="AKRAM PETER">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/akram.jpg" alt="AKRAM LUBEGA">
+                </div>
+                <div class="back">
+                    <h3>AKRAM PETER (HP)</h3>
+                    <p>Hobbies:Preaching,Debating</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256787475141" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" data-name="SHELIA">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/sheila.jpg" alt="SHEILA">
+                </div>
+                <div class="back">
+                    <h3>SHEILA</h3>
+                    <p>Hobbies:Singing and reading</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/256789462955" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+        <div class="card" data-name="OWINY">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/owiny.jpg" alt="R2710">
+                </div>
+                <div class="back">
+                    <h3>OWINY R2710</h3>
+                    <p>Hobbies:Singing and reading</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>   
+        
+        <div class="card" data-name="JUDITH">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/judith.jpg" alt="JUDITH">
+                </div>
+                <div class="back">
+                    <h3>JUDITH</h3>
+                    <p>Hobbies:Singing and reading</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+
+        <div class="card" data-name="ILLAH">
+            <div class="inner-card">
+                <div class="front">
+                    <img src="photos/illah-1.jpg" alt="R2710">
+                </div>
+                <div class="back">
+                    <h3>ILLAH JUSTINE</h3>
+                    <p>Hobbies:Singing and reading</p>
+                    <div class="social-buttons">
+                        <a href="https://wa.me/" target="_blank" rel="noopener" class="social-link whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/username" target="_blank" rel="noopener" class="social-link instagram">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>   
+         <!-- Dynamic cards will be added here -->
+        <div id="profileCardsContainer"></div>
+        <div id="profileForm">
+            <h2>Update Your Profile</h2>
+            <input type="text" id="displayName" placeholder="Display Name">
+            <input type="text" id="hobbies" placeholder="Hobbies">
+            <input type="text" id="whatsapp" placeholder="WhatsApp Number">
+            <input type="text" id="instagram" placeholder="Instagram Link">
+            <input type="text" id="twitter" placeholder="Twitter Link">
+            <label for="profileImage">Profile Image:</label>
+            <input type="file" id="profileImage" title="Upload your profile image" placeholder="Choose a profile image">
+            <button onclick="saveProfile()">Save Profile</button>
+            <p id="profileStatus"></p>
+        </div>    
+    </div>
+    <script>
+if (!localStorage.getItem('token')) {
+    window.location.href = 'login.html';
+}
+</script>
+    <script>
+window.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('profileCardsContainer');
+    if (!container) return;
+    fetch('http://localhost:3000/api/profiles')
+        .then(res => res.json())
+        .then(profiles => {
+            profiles.forEach(profile => {
+                // WhatsApp link formatting
+                let whatsappLink = profile.whatsapp
+                    ? `https://wa.me/${profile.whatsapp.replace(/\D/g, '')}`
+                    : '#';
+                // Instagram link formatting
+                let instagramLink = profile.instagram
+                    ? `https://instagram.com/${profile.instagram.replace(/^@/, '')}`
+                    : '#';
+                // Twitter link formatting
+                let twitterLink = profile.twitter
+                    ? `https://twitter.com/${profile.twitter.replace(/^@/, '')}`
+                    : '#';
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.setAttribute('data-name', profile.fullName);
+
+                card.innerHTML = `
+                    <div class="inner-card">
+                        <div class="front">
+                            <img src="${profile.photo && profile.photo.startsWith('data:') 
+    ? profile.photo 
+    : (profile.photo ? profile.photo : 'photos/default.jpg')}" alt="${profile.fullName}">
+                        </div>
+                        <div class="back">
+                            <h3>${profile.fullName}</h3>
+                            <p>Hobbies: ${profile.hobbies || ''}</p>
+                            <div class="social-buttons">
+                                <a href="${whatsappLink}" target="_blank" rel="noopener" class="social-link whatsapp">
+                                    <i class="fab fa-whatsapp"></i> WhatsApp
+                                </a>
+                                <a href="${instagramLink}" target="_blank" rel="noopener" class="social-link instagram">
+                                    <i class="fab fa-instagram"></i> Instagram
+                                </a>
+                                <a href="${twitterLink}" target="_blank" rel="noopener" class="social-link twitter">
+                                    <i class="fab fa-twitter"></i> Twitter
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+                // Add flip event
+                card.addEventListener('click', function() {
+                  card.classList.toggle('flipped');
+                });
+            });
+        });
+});
+</script>
+<script>
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', function() {
+    card.classList.toggle('flipped');
+  });
+});
+</script>
+<button onclick="localStorage.removeItem('token'); window.location.href='login.html';">Logout</button>
+  </body>
+  </html>
