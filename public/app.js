@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Profile page or profile form on index.html
         const profileForm = document.getElementById('profileForm') || document.getElementById('profile-form');
         if (profileForm) {
-            // Pre-fill form if user has a profile
-            fetch('https://your-app.up.railway.app/api/profiles/me', {
+            
+            fetch('https://paragons1723-production.up.railway.app/api/profiles/me', { // Pre-fill form if user has a profile
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     };
                     const method = window.currentProfileId ? 'PUT' : 'POST';
                     const url = window.currentProfileId
-                        ? `https://your-app.up.railway.app/api/profiles/${window.currentProfileId}`
-                        : 'https://your-app.up.railway.app/api/profiles';
+                        ? `https://paragons1723-production.up.railway.app/api/profiles/${window.currentProfileId}`
+                        : 'https://paragons1723-production.up.railway.app/api/profiles';
 
                     fetch(url, {
                         method: method,
@@ -123,4 +123,4 @@ if (document.querySelector('button[onclick*="saveProfile"]') && typeof window.sa
     };
 }
 
-fetch('https://paragons1723-production.up.railway.app/api/register', ...)
+// fetch('https://paragons1723-production.up.railway.app/api/register', ...) // <-- Remove or implement as needed

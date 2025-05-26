@@ -175,8 +175,9 @@
       })
       .then(res => res.json())
       .then(data => {
+          if (!data.success) throw new Error(data.error || 'Registration failed');
           // 2. Log the user in to get the token
-          return fetch('https://your-app.up.railway.app/api/login', {
+          return fetch('https://paragons1723-production.up.railway.app/api/login', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -196,7 +197,7 @@
           const file = fileInput.files[0];
 
           function sendProfile(profile) {
-            fetch('https://your-app.up.railway.app/api/profiles', {
+            fetch('https://paragons1723-production.up.railway.app/api/profiles', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
@@ -241,8 +242,8 @@
               sendProfile(profile);
           }
       })
-      .catch(() => {
-          document.getElementById('profile-message').textContent = 'Registration or login failed!';
+      .catch((err) => {
+          document.getElementById('profile-message').textContent = err.message || 'Registration or login failed!';
       });
     });
 
