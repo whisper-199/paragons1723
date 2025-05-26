@@ -6,8 +6,21 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const app = express();
+const allowedOrigins = [
+  'https://paragons1723-production.up.railway.app',
+  'http://localhost:3000'
+];
+
 app.use(cors({
-  origin: 'https://paragons1723-production.up.railway.app', // your frontend URL
+  origin: function(origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(bodyParser.json({ limit: '10mb' })); // Increase limit for base64 images
