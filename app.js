@@ -30,6 +30,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById('instagram').value = profile.instagram || '';
                     document.getElementById('twitter').value = profile.twitter || '';
                     window.currentProfileId = profile.id;
+
+                    // Set profile photo
+                    const photoElement = document.getElementById('profilePhoto');
+                    if (photoElement) {
+                        photoElement.src = profile.photo && profile.photo.startsWith('data:')
+                            ? profile.photo
+                            : (profile.photo ? profile.photo : 'photos/default.jpg');
+                    }
                 }
             });
 

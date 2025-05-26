@@ -368,21 +368,25 @@ border: none;}
   justify-content: space-between;
   border-radius: 15px;}
     
-    .lower-div-3 :nth-child(1){height: 22%;
-    width:100%;
+    .lower-div-3 :nth-child(1){
+  height: 22%;
+  width:100%;
   background:url('photos/Dankyathumba-1.jpg');
   background-position: inherit;
   background-size: inherit;
   background-repeat: inherit;
-  border-radius: inherit;}
+  border-radius: inherit;
+}
 
-    .lower-div-3 :nth-child(2){height: 25%;
-    width:100%;
-    background:url('photos/sulphyne-1.jpg');
-    background-position: inherit;
-    background-size: inherit;
-    background-repeat: inherit;
-    border-radius: inherit;}
+.lower-div-3 :nth-child(2){
+  height: 25%;
+  width:100%;
+  background:url('photos/sulphyne.jpg');
+  background-position: inherit;
+  background-size: inherit;
+  background-repeat: inherit;
+  border-radius: inherit;
+}
 
     .lower-div-3 :nth-child(3){height: none;}
 
