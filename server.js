@@ -6,7 +6,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'https://paragons1723-production.up.railway.app', // your frontend URL
+  credentials: true
+}));
 app.use(bodyParser.json({ limit: '10mb' })); // Increase limit for base64 images
 app.use(express.static('public'));
 
