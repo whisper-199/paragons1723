@@ -50,17 +50,14 @@ db.query(`CREATE TABLE IF NOT EXISTS profiles (
     photo MEDIUMTEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-`);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;`);
 
-// Create users table if not exists
 db.query(`CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-`);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;`);
 
 const SECRET = 'Vocational200.'; // Use a strong secret in production
 
@@ -102,11 +99,9 @@ function authenticateToken(req, res, next) {
 app.post('/api/profiles', authenticateToken, (req, res) => {
     const { fullName, bio, hobbies, whatsapp, instagram, twitter, photo } = req.body;
     const user_id = req.user.user_id;
-    // Check if profile exists
     db.query('SELECT id FROM profiles WHERE user_id = ?', [user_id], (err, results) => {
         if (err) return res.status(500).send(err);
         if (results.length > 0) {
-            // Update existing profile
             const id = results[0].id;
             db.query(
                 'UPDATE profiles SET fullName=?, bio=?, hobbies=?, whatsapp=?, instagram=?, twitter=?, photo=? WHERE id=?',
@@ -117,85 +112,84 @@ app.post('/api/profiles', authenticateToken, (req, res) => {
                 }
             );
         } else {
+            db.query(
                 'INSERT INTO profiles (fullName, bio, hobbies, whatsapp, instagram, twitter, photo, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
                 [fullName, bio, hobbies, whatsapp, instagram, twitter, photo, user_id],
-                (err3, result) => {es (fullName, bio, hobbies, whatsapp, instagram, twitter, photo, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                    if (err3) return res.status(500).send(err3);itter, photo, user_id],
+                (err3, result) => {
+                    if (err3) return res.status(500).send(err3);
                     res.json({ success: true, updated: false, id: result.insertId });
-                }   if (err3) return res.status(500).send(err3);
-            );      res.json({ success: true, updated: false, id: result.insertId });
-        }       }
-    });     );
-});     }
+                }
+            );
+        }
     });
+});
+
 // Get profile by user ID (authenticated)
 app.get('/api/profiles/me', authenticateToken, (req, res) => {
-    const user_id = req.user.user_id;ted)
+    const user_id = req.user.user_id;
     db.query('SELECT * FROM profiles WHERE user_id = ?', [user_id], (err, results) => {
         if (err) return res.status(500).send(err);
         if (results.length === 0) return res.status(404).json({ error: 'Profile not found' });
-        res.json(results[0]);tatus(500).send(err);
-    }); if (results.length === 0) return res.status(404).json({ error: 'Profile not found' });
-});     res.json(results[0]);
+        res.json(results[0]);
     });
+});
+
 // Get all profiles (public)
 app.get('/api/profiles', (req, res) => {
     db.query('SELECT * FROM profiles', (err, results) => {
         if (err) return res.status(500).send(err);
-        res.json(results);M profiles', (err, results) => {
-    }); if (err) return res.status(500).send(err);
-});     res.json(results);
+        res.json(results);
     });
+});
+
 // Get profile by ID (public)
 app.get('/api/profiles/:id', (req, res) => {
     const { id } = req.params;
     db.query('SELECT * FROM profiles WHERE id = ?', [id], (err, results) => {
         if (err) return res.status(500).send(err);
         if (results.length === 0) return res.status(404).json({ error: 'Profile not found' });
-        res.json(results[0]);tatus(500).send(err);
-    }); if (results.length === 0) return res.status(404).json({ error: 'Profile not found' });
-});     res.json(results[0]);
+        res.json(results[0]);
     });
+});
+
 // Update profile by ID (authenticated, own profile only)
 app.put('/api/profiles/:id', authenticateToken, (req, res) => {
-    const { id } = req.params;nticated, own profile only)
+    const { id } = req.params;
     const { fullName, bio, hobbies, whatsapp, instagram, twitter, photo } = req.body;
     const user_id = req.user.user_id;
-    // Ensure user can only update their own profileram, twitter, photo } = req.body;
     db.query('SELECT * FROM profiles WHERE id = ?', [id], (err, results) => {
         if (err || results.length === 0) return res.sendStatus(404);
-        if (results[0].user_id !== user_id) return res.sendStatus(403);) => {
-        db.query(| results.length === 0) return res.sendStatus(404);
+        if (results[0].user_id !== user_id) return res.sendStatus(403);
+        db.query(
             'UPDATE profiles SET fullName=?, bio=?, hobbies=?, whatsapp=?, instagram=?, twitter=?, photo=? WHERE id=?',
             [fullName, bio, hobbies, whatsapp, instagram, twitter, photo, id],
-            (err2) => {files SET fullName=?, bio=?, hobbies=?, whatsapp=?, instagram=?, twitter=?, photo=? WHERE id=?',
-                if (err2) return res.status(500).send(err2);itter, photo, id],
+            (err2) => {
+                if (err2) return res.status(500).send(err2);
                 res.json({ success: true });
-            }   if (err2) return res.status(500).send(err2);
-        );      res.json({ success: true });
-    });     }
-});     );
+            }
+        );
     });
+});
+
 // Delete profile by ID (authenticated, own profile only)
 app.delete('/api/profiles/:id', authenticateToken, (req, res) => {
-    const { id } = req.params;nticated, own profile only)
-    const user_id = req.user.user_id;nticateToken, (req, res) => {
-    // Ensure user can only delete their own profile
+    const { id } = req.params;
+    const user_id = req.user.user_id;
     db.query('SELECT * FROM profiles WHERE id = ?', [id], (err, results) => {
         if (err || results.length === 0) return res.sendStatus(404);
-        if (results[0].user_id !== user_id) return res.sendStatus(403);) => {
+        if (results[0].user_id !== user_id) return res.sendStatus(403);
         db.query('DELETE FROM profiles WHERE id = ?', [id], (err2) => {
-            if (err2) return res.status(500).send(err2);endStatus(403);
-            res.json({ success: true });HERE id = ?', [id], (err2) => {
-        }); if (err2) return res.status(500).send(err2);
-    });     res.json({ success: true });
-});     });
+            if (err2) return res.status(500).send(err2);
+            res.json({ success: true });
+        });
     });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-});.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+});
+
 // Image tag example (to be used in your HTML/JSX):
 // <img src="${profile.photo && profile.photo.startsWith('data:') 
 //     ? profile.photo o be used in your HTML/JSX):
