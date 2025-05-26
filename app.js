@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const profileForm = document.getElementById('profileForm') || document.getElementById('profile-form');
         if (profileForm) {
             // Pre-fill form if user has a profile
-            fetch('http://localhost:3000/api/profiles/me', {
+            fetch('https://your-app.up.railway.app/api/profiles/me', {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     };
                     const method = window.currentProfileId ? 'PUT' : 'POST';
                     const url = window.currentProfileId
-                        ? `http://localhost:3000/api/profiles/${window.currentProfileId}`
-                        : 'http://localhost:3000/api/profiles';
+                        ? `https://your-app.up.railway.app/api/profiles/${window.currentProfileId}`
+                        : 'https://your-app.up.railway.app/api/profiles';
 
                     fetch(url, {
                         method: method,
