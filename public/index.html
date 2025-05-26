@@ -403,7 +403,7 @@ if (!localStorage.getItem('token')) {
 window.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('profileCardsContainer');
     if (!container) return;
-    fetch('https://your-app.up.railway.app/api/login', { ... })
+    fetch('https://your-app.up.railway.app/api/profiles')
         .then(res => res.json())
         .then(profiles => {
             profiles.forEach(profile => {

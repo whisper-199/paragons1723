@@ -165,7 +165,7 @@
       e.preventDefault();
 
       // 1. Register the user
-      fetch('http://localhost:3000/api/register', {
+      fetch('https://your-app.up.railway.app/api/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -196,7 +196,7 @@
           const file = fileInput.files[0];
 
           function sendProfile(profile) {
-              fetch('http://localhost:3000/api/profiles', {
+            fetch('https://your-app.up.railway.app/api/profiles', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
