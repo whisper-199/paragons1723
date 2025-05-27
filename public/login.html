@@ -114,7 +114,11 @@
       <div id="login-message"></div>
     </form>
     <a class="login-link" href="register.html">Don't have an account? Register</a>
-  </div>
+  </div>  <script>
+    if (localStorage.getItem('token')) {
+      window.location.href = 'index.html';
+    }
+  </script>
   <script>
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();

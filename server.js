@@ -232,11 +232,12 @@ app.delete('/api/admin/profiles/:id', authenticateToken, requireAdmin, (req, res
 
 // Admin: Post announcement
 app.post('/api/admin/announcement', authenticateToken, requireAdmin, (req, res) => {
-    const { message } = req.body;
-    db.query('INSERT INTO announcements (message) VALUES (?)', [message], (err, result) => {
-        if (err) return res.status(500).json({ error: 'Failed to post announcement' });
-        res.json({ success: true, id: result.insertId });
-    });
+  const { message } = req.body;
+  if (!message) return res.status(400).json({ error: 'Message required' });
+  db.query('INSERT INTO announcements (message) VALUES (?)', [message], (err, result) => {
+    if (err) return res.status(500).json({ error: 'Failed to save announcement' });
+    res.json({ success: true });
+  });
 });
 
 // Public: Get announcements
