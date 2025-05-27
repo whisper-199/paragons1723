@@ -21,7 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error('Network response was not ok');
+                return res.json();
+            })
             .then(profile => {
                 if (profile) {
                     document.getElementById('displayName').value = profile.fullName || '';
