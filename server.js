@@ -11,19 +11,12 @@ const app = express();
 
 const allowedOrigins = [
   'https://paragons1723-production.up.railway.app',
+  'https://www.paragons1723-production.up.railway.app',
   'http://localhost:3000'
 ];
 
-// CORS MUST BE FIRST!
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      return callback(null, true);
-    } else {
-      return callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: allowedOrigins, // or '*' for public APIs
   credentials: true
 }));
 
