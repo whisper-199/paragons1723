@@ -94,12 +94,53 @@
         font-weight: bold;
         color: #FFD700;
       }
+      .admin-cards-container {
+        margin: 2rem auto;
+        max-width: 900px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        justify-content: center;
+      }
+      .admin-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px #00336633;
+        padding: 1rem;
+        width: 220px;
+        text-align: center;
+        position: relative;
+      }
+      .admin-card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 0.5rem;
+      }
+      .delete-btn {
+        background: #ff4d4d;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        margin-top: 0.5rem;
+        font-weight: bold;
+      }
+      .delete-btn:hover {
+        background: #b30000;
+      }
       @media (max-width: 600px) {
         .register-container {
           padding: 1.2rem 0.5rem;
         }
         .register-container h2 {
           font-size: 1.4rem;
+        }
+        .admin-cards-container {
+          flex-direction: column;
+          align-items: center;
         }
       }
     </style>
@@ -131,6 +172,12 @@
       <div id="gallery-upload-status"></div>
     </form>
   </div>
+
+  <h3 style="text-align:center; color:#003366;">All User Cards</h3>
+  <div class="admin-cards-container" id="admin-cards-container">
+    <!-- Cards will be loaded here -->
+  </div>
+
   <script>
     // Check admin token
     if (!localStorage.getItem('token')) {
@@ -178,7 +225,7 @@
       .catch(() => document.getElementById('announcement-status').textContent = 'Failed');
     });
 
-    // Gallery image upload (this requires a backend endpoint for file upload)
+    // Gallery image upload
     document.getElementById('gallery-upload-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const file = document.getElementById('gallery-image').files[0];
@@ -204,6 +251,59 @@
       };
       reader.readAsDataURL(file);
     });
+
+    // Load all user cards
+    function loadAdminCards() {
+      fetch('https://paragons1723-production.up.railway.app/api/profiles', {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      .then(res => res.json())
+      .then(profiles => {
+        const container = document.getElementById('admin-cards-container');
+        container.innerHTML = '';
+        profiles.forEach(profile => {
+          const card = document.createElement('div');
+          card.className = 'admin-card';
+          card.innerHTML = `
+            <img src="${profile.photo && profile.photo.startsWith('data:') 
+              ? profile.photo 
+              : (profile.photo ? profile.photo : 'photos/default.jpg')}" alt="${profile.fullName}">
+            <h4>${profile.fullName}</h4>
+            <p>Hobbies: ${profile.hobbies || ''}</p>
+            <button class="delete-btn" data-id="${profile.id}">Delete</button>
+          `;
+          container.appendChild(card);
+        });
+
+        // Add delete event listeners
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            if (confirm('Are you sure you want to delete this profile?')) {
+              fetch('https://paragons1723-production.up.railway.app/api/admin/profiles/' + id, {
+                method: 'DELETE',
+                headers: {
+                  'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+              })
+              .then(res => res.json())
+              .then(data => {
+                if (data.success) {
+                  loadAdminCards();
+                } else {
+                  alert('Failed to delete profile');
+                }
+              })
+              .catch(() => alert('Failed to delete profile'));
+            }
+          });
+        });
+      });
+    }
+
+    loadAdminCards();
 
     function logout() {
       localStorage.removeItem('token');
