@@ -458,6 +458,26 @@ document.querySelectorAll('.card').forEach(card => {
   });
 });
 </script>
+<script>
+// filepath: c:\Users\USER\Desktop\paragons2023-main\public\index.html
+window.addEventListener('DOMContentLoaded', function() {
+  const loginBtn = document.getElementById('login');
+  if (!loginBtn) return;
+  if (localStorage.getItem('token')) {
+    loginBtn.textContent = 'Logout';
+    loginBtn.href = '#';
+    loginBtn.onclick = function(e) {
+      e.preventDefault();
+      localStorage.removeItem('token');
+      window.location.reload();
+    };
+  } else {
+    loginBtn.textContent = 'Login';
+    loginBtn.href = 'login.html';
+    loginBtn.onclick = null;
+  }
+});
+</script>
 <button onclick="localStorage.removeItem('token'); window.location.href='login.html';">Logout</button>
   </body>
   </html>
