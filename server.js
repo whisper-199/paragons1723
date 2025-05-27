@@ -4,6 +4,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 
@@ -182,6 +184,79 @@ app.delete('/api/profiles/:id', authenticateToken, (req, res) => {
             if (err2) return res.status(500).send(err2);
             res.json({ success: true });
         });
+    });
+});
+
+// filepath: 
+function requireAdmin(req, res, next) {
+    if (!req.user || !req.user.user_id) return res.sendStatus(401);
+    db.query('SELECT is_admin FROM users WHERE id = ?', [req.user.user_id], (err, results) => {
+        if (err || results.length === 0) return res.sendStatus(403);
+        if (!results[0].is_admin) return res.sendStatus(403);
+        next();
+    });
+}
+
+// Admin: Reset password
+app.post('/api/admin/reset-password', authenticateToken, requireAdmin, (req, res) => {
+    const { email, newPassword } = req.body;
+    const password_hash = bcrypt.hashSync(newPassword, 10);
+    db.query('UPDATE users SET password_hash=? WHERE email=?', [password_hash, email], (err, result) => {
+        if (err) return res.status(500).json({ error: 'Failed to reset password' });
+        res.json({ success: true });
+    });
+});
+
+// Admin: Edit any profile
+app.put('/api/admin/profiles/:id', authenticateToken, requireAdmin, (req, res) => {
+    const { id } = req.params;
+    const { fullName, bio, hobbies, whatsapp, instagram, twitter, photo } = req.body;
+    db.query(
+        'UPDATE profiles SET fullName=?, bio=?, hobbies=?, whatsapp=?, instagram=?, twitter=?, photo=? WHERE id=?',
+        [fullName, bio, hobbies, whatsapp, instagram, twitter, photo, id],
+        (err2) => {
+            if (err2) return res.status(500).send(err2);
+            res.json({ success: true });
+        }
+    );
+});
+
+// Admin: Delete any profile
+app.delete('/api/admin/profiles/:id', authenticateToken, requireAdmin, (req, res) => {
+    const { id } = req.params;
+    db.query('DELETE FROM profiles WHERE id = ?', [id], (err2) => {
+        if (err2) return res.status(500).send(err2);
+        res.json({ success: true });
+    });
+});
+
+// Admin: Post announcement
+app.post('/api/admin/announcement', authenticateToken, requireAdmin, (req, res) => {
+    const { message } = req.body;
+    db.query('INSERT INTO announcements (message) VALUES (?)', [message], (err, result) => {
+        if (err) return res.status(500).json({ error: 'Failed to post announcement' });
+        res.json({ success: true, id: result.insertId });
+    });
+});
+
+// Public: Get announcements
+app.get('/api/announcements', (req, res) => {
+    db.query('SELECT * FROM announcements ORDER BY id DESC', (err, results) => {
+        if (err) return res.status(500).send(err);
+        res.json(results);
+    });
+});
+
+// Admin: Upload gallery image
+app.post('/api/admin/upload-image', authenticateToken, requireAdmin, (req, res) => {
+    const { filename, data } = req.body;
+    if (!filename || !data) return res.status(400).json({ error: 'Missing filename or data' });
+    // Remove data URL prefix if present
+    const base64Data = data.replace(/^data:image\/\w+;base64,/, "");
+    const filePath = path.join(__dirname, 'public', 'photos', filename);
+    fs.writeFile(filePath, base64Data, {encoding: 'base64'}, function(err) {
+        if (err) return res.status(500).json({ error: 'Failed to save image' });
+        res.json({ success: true });
     });
 });
 

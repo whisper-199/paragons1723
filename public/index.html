@@ -375,6 +375,19 @@
             <p id="profileStatus"></p>
         </div>    
     </div>
+    <div id="announcements"></div>
+<script>
+fetch('https://paragons1723-production.up.railway.app/api/announcements')
+  .then(res => res.json())
+  .then(data => {
+    const div = document.getElementById('announcements');
+    data.forEach(a => {
+      const p = document.createElement('p');
+      p.textContent = a.message;
+      div.appendChild(p);
+    });
+  });
+</script>
     <script>
 if (!localStorage.getItem('token')) {
     window.location.href = 'login.html';

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | Paragons 2023</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      body {
+        background: linear-gradient(120deg, #003366 60%, #FFD700 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', 'Georgia', sans-serif;
+        margin: 0;
+        color: #222;
+      }
+      .register-container {
+        width: min(95vw, 480px);
+        margin: 40px auto;
+        background: rgba(255,255,255,0.18);
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31,38,135,0.27);
+        backdrop-filter: blur(8px);
+        padding: 2.5rem 2rem 2rem 2rem;
+        color: #003366;
+      }
+      .register-container h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+        color: #FFD700;
+        text-shadow: 0 0 8px #003366;
+      }
+      .register-container h3 {
+        margin-top: 2rem;
+        color: #003366;
+        font-size: 1.2rem;
+        border-bottom: 1px solid #FFD70044;
+        padding-bottom: 0.3rem;
+      }
+      form {
+        margin-bottom: 1.5rem;
+      }
+      input[type="email"],
+      input[type="password"],
+      input[type="text"],
+      input[type="file"],
+      textarea {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        border-radius: 8px;
+        border: 1px solid #00336633;
+        background: rgba(255,255,255,0.15);
+        color: #003366;
+        font-size: 1rem;
+        outline: none;
+        margin-top: 0.2rem;
+        margin-bottom: 0.7rem;
+        transition: border 0.2s;
+        box-sizing: border-box;
+      }
+      textarea {
+        min-height: 60px;
+        resize: vertical;
+      }
+      input[type="file"] {
+        background: none;
+        color: #003366;
+      }
+      input:focus, textarea:focus {
+        border: 1.5px solid #FFD700;
+      }
+      .register-btn, .logout-btn {
+        width: 100%;
+        padding: 0.9rem;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #003366 60%, #FFD700 100%);
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        cursor: pointer;
+        margin-top: 0.5rem;
+        transition: background 0.2s, color 0.2s;
+      }
+      .register-btn:hover, .logout-btn:hover {
+        background: linear-gradient(90deg, #FFD700 10%, #003366 100%);
+        color: #003366;
+      }
+      #reset-message, #announcement-status, #gallery-upload-status {
+        text-align: center;
+        margin-top: 0.5rem;
+        font-weight: bold;
+        color: #FFD700;
+      }
+      @media (max-width: 600px) {
+        .register-container {
+          padding: 1.2rem 0.5rem;
+        }
+        .register-container h2 {
+          font-size: 1.4rem;
+        }
+      }
+    </style>
+</head>
+<body>
+  <div class="register-container">
+    <h2>Admin Dashboard</h2>
+    <button onclick="logout()" class="logout-btn" style="margin-bottom:10px;">Logout</button>
+    <h3>Reset User Password</h3>
+    <form id="reset-password-form">
+      <input type="email" id="reset-email" placeholder="User Email" required>
+      <input type="password" id="reset-new-password" placeholder="New Password" required>
+      <button type="submit" class="register-btn">Reset Password</button>
+      <div id="reset-message"></div>
+    </form>
+
+    <h3>Post Announcement</h3>
+    <form id="announcement-form">
+      <textarea id="announcement-message" placeholder="Write announcement..." required></textarea>
+      <button type="submit" class="register-btn">Post</button>
+      <div id="announcement-status"></div>
+    </form>
+
+    <h3>Upload Gallery Image</h3>
+    <form id="gallery-upload-form" enctype="multipart/form-data">
+      <input type="file" id="gallery-image" accept="image/*" required>
+      <input type="text" id="gallery-filename" placeholder="Image filename (e.g. newphoto.jpg)" required>
+      <button type="submit" class="register-btn">Upload</button>
+      <div id="gallery-upload-status"></div>
+    </form>
+  </div>
+  <script>
+    // Check admin token
+    if (!localStorage.getItem('token')) {
+      window.location.href = 'login.html';
+    }
+
+    // Reset password
+    document.getElementById('reset-password-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      fetch('https://paragons1723-production.up.railway.app/api/admin/reset-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+          email: document.getElementById('reset-email').value,
+          newPassword: document.getElementById('reset-new-password').value
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('reset-message').textContent = data.success ? 'Password reset!' : (data.error || 'Failed');
+      })
+      .catch(() => document.getElementById('reset-message').textContent = 'Failed');
+    });
+
+    // Post announcement
+    document.getElementById('announcement-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      fetch('https://paragons1723-production.up.railway.app/api/admin/announcement', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+          message: document.getElementById('announcement-message').value
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('announcement-status').textContent = data.success ? 'Announcement posted!' : (data.error || 'Failed');
+      })
+      .catch(() => document.getElementById('announcement-status').textContent = 'Failed');
+    });
+
+    // Gallery image upload (this requires a backend endpoint for file upload)
+    document.getElementById('gallery-upload-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const file = document.getElementById('gallery-image').files[0];
+      const filename = document.getElementById('gallery-filename').value;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        fetch('https://paragons1723-production.up.railway.app/api/admin/upload-image', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          },
+          body: JSON.stringify({
+            filename: filename,
+            data: evt.target.result
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('gallery-upload-status').textContent = data.success ? 'Image uploaded!' : (data.error || 'Failed');
+        })
+        .catch(() => document.getElementById('gallery-upload-status').textContent = 'Failed');
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function logout() {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>
