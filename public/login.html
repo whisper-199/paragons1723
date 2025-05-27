@@ -5,6 +5,98 @@
     <title>Login | Paragons 2023</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <style>
+      body {
+        background: linear-gradient(120deg, #003366 60%, #FFD700 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', 'Georgia', sans-serif;
+        margin: 0;
+        color: #222;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .register-container {
+        width: min(95vw, 400px);
+        margin: 40px auto;
+        background: rgba(255,255,255,0.18);
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31,38,135,0.27);
+        backdrop-filter: blur(8px);
+        padding: 2.5rem 2rem 2rem 2rem;
+        color: #003366;
+      }
+      .register-container h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+        letter-spacing: 2px;
+        color: #FFD700;
+        text-shadow: 0 0 8px #003366;
+      }
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 0.3rem;
+        font-weight: 500;
+        color: #003366;
+      }
+      .form-group input[type="email"],
+      .form-group input[type="password"] {
+        width: 100%;
+        padding: 0.7rem 1rem;
+        border-radius: 8px;
+        border: 1px solid #00336633;
+        background: rgba(255,255,255,0.15);
+        color: #003366;
+        font-size: 1rem;
+        outline: none;
+        margin-top: 0.2rem;
+        transition: border 0.2s;
+        box-sizing: border-box;
+      }
+      .form-group input:focus {
+        border: 1.5px solid #FFD700;
+      }
+      .register-btn {
+        width: 100%;
+        padding: 0.9rem;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(90deg, #003366 60%, #FFD700 100%);
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        cursor: pointer;
+        margin-top: 0.5rem;
+        transition: background 0.2s, color 0.2s;
+      }
+      .register-btn:hover {
+        background: linear-gradient(90deg, #FFD700 10%, #003366 100%);
+        color: #003366;
+      }
+      #login-message {
+        text-align: center;
+        margin-top: 0.7rem;
+        font-weight: bold;
+        color: #FFD700;
+      }
+      .login-link {
+        display: block;
+        text-align: center;
+        margin-top: 1.2rem;
+        color: #003366;
+        text-decoration: underline;
+        font-size: 1rem;
+        transition: color 0.2s;
+      }
+      .login-link:hover {
+        color: #FFD700;
+      }
+    </style>
 </head>
 <body>
   <div class="register-container">
