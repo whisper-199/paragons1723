@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <link rel="icon" href="photos/group.jpg" type="image/png">
 </head>
 <body>
 
@@ -498,5 +500,33 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <button onclick="localStorage.removeItem('token'); window.location.href='login.html';">Logout</button>
+<div id="toast" style="display:none;position:fixed;bottom:30px;right:30px;background:#003366;color:#fff;padding:1em 2em;border-radius:8px;z-index:9999;"></div>
+<script>
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  setTimeout(() => toast.style.display = 'none', 3000);
+}
+</script>
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <img src="photos/group.jpg" alt="Paragons Logo" class="footer-logo">
+      <span>Paragons 2017-2023</span>
+    </div>
+    <div class="footer-social">
+      <a href="https://instagram.com/pra.isefrank" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://twitter.com/PARAGONS2017" target="_blank" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </div>
+    <div class="footer-credits">
+      <span>© 2023 Paragons. CREATED BY FRANK AND TSO M</span>
+    </div>
+  </div>
+</footer>
   </body>
   </html>

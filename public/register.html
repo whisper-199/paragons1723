@@ -6,9 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Montserrat -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="styles.css">
     <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+        background: #f0f2f5;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
       .register-container {
         width: min(90vw, 500px);
         margin: 40px auto;
@@ -111,6 +120,17 @@
       .logout-btn:hover {
         background: #ff1a1a;
       }
+      #toast {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #003366;
+        color: #fff;
+        padding: 1em 2em;
+        border-radius: 8px;
+        z-index: 9999;
+      }
     </style>
 </head>
 <body>
@@ -160,6 +180,7 @@
     </form>
     <a class="login-link" href="login.html">Already have an account? Login</a>
   </div>
+  <div id="toast"></div>
   <script>
     document.getElementById('profile-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -208,6 +229,7 @@
               .then(res => res.json())
               .then(data => {
                   document.getElementById('profile-message').textContent = 'Profile saved!';
+                  showToast('Profile saved!');
                   setTimeout(() => window.location.href = 'index.html', 1000);
               })
               .catch(() => {
@@ -252,6 +274,7 @@
       localStorage.removeItem('token');
       document.getElementById('logout-button').style.display = 'none';
       document.getElementById('profile-message').textContent = 'Logged out successfully!';
+      showToast('Logged out successfully!');
       setTimeout(() => window.location.href = 'login.html', 1000);
     });
 
@@ -285,6 +308,13 @@
         reader.readAsDataURL(file);
       }
     });
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(() => toast.style.display = 'none', 3000);
+    }
   </script>
 </body>
 </html>

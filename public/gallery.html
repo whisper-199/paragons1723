@@ -5,6 +5,8 @@
     <title>Gallery | Paragons 2023</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <style>
       body {
         background: linear-gradient(120deg, #003366 60%, #FFD700 100%);
@@ -81,7 +83,9 @@
     <div class="gallery-title">Paragons 2023 Gallery</div>
     <div class="gallery-grid" id="gallery-grid"></div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
   <script>
+  const lightbox = GLightbox({ selector: '.gallery-img-link' });
 fetch('/photos')
   .then(res => res.json())
   .then(images => {
@@ -94,7 +98,9 @@ fetch('/photos')
       const item = document.createElement('div');
       item.className = 'gallery-item';
       item.innerHTML = `
-        <img src="photos/${img}" alt="${img}" class="gallery-img" loading="lazy">
+        <a href="photos/${img}" class="gallery-img-link">
+          <img src="photos/${img}" alt="${img}" class="gallery-img" loading="lazy">
+        </a>
         <div class="gallery-caption">${img}</div>
       `;
       grid.appendChild(item);
