@@ -1,96 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Gallery</title>
-	<link rel="stylesheet" href="styles.css">
-	
+    <meta charset="UTF-8">
+    <title>Gallery | Paragons 2023</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      body {
+        background: linear-gradient(120deg, #003366 60%, #FFD700 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', 'Georgia', sans-serif;
+        margin: 0;
+        color: #222;
+      }
+      .gallery-container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 2rem;
+        background: rgba(255,255,255,0.18);
+        border-radius: 18px;
+        box-shadow: 0 8px 32px 0 rgba(31,38,135,0.27);
+        backdrop-filter: blur(8px);
+      }
+      .gallery-title {
+        text-align: center;
+        font-size: 2.2rem;
+        color: #FFD700;
+        margin-bottom: 2rem;
+        text-shadow: 0 0 8px #003366;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+      }
+      .gallery-item {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px #00336633;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.2s;
+      }
+      .gallery-item:hover {
+        transform: scale(1.04);
+        box-shadow: 0 4px 16px #FFD70055;
+      }
+      .gallery-img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        background: #eee;
+        display: block;
+      }
+      .gallery-caption {
+        padding: 0.7rem 1rem;
+        text-align: center;
+        color: #003366;
+        font-size: 1rem;
+        background: rgba(255,255,255,0.7);
+        width: 100%;
+      }
+      @media (max-width: 600px) {
+        .gallery-container {
+          padding: 0.5rem;
+        }
+        .gallery-title {
+          font-size: 1.3rem;
+        }
+        .gallery-img {
+          height: 140px;
+        }
+      }
+    </style>
 </head>
-
 <body>
-	<nav class="nav-bar">
-
-	</nav>
-<div class="main-div">
-	<div class="left-div">
-<p class="text">PARAGONS<br> 2023</p>
-<P class="smaller-text">New Gallery</P>
-	</div>
-	<div class="right-div">
-		<div class="right-div-a">
-			<div class="right-div-a-1 zoom-effect">
-
-			</div>
-			<div class="right-div-a-2 zoom-effect">
-
-			</div>
-		</div>
-		<div class="right-div-b">
-			<div class="right-div-b-1 zoom-effect">
-
-			</div>
-			<div class="right-div-b-2 zoom-effect">
-
-			</div>
-		</div>
-		<div class="right-div-c zoom-effect">
-
-		</div>	
-	</div>
-</div>	
-
-<hr>
-<hr>
-
-<div class="lower-div">
-	<div class="bigger-right-div">
-		<div class="top-div">
-			<div class="top-div-1"></div>
-			<div class="top-div-2"></div>
-			<div class="top-div-3"></div>
-		</div>
-
-		<div class="bottom-div">
-			<div class="bottom-div-1"></div>
-			<div class="bottom-div-2"></div>
-			<div class="bottom-div-3"></div>
-		</div>
-
-	</div>
-</div>
-<div class="lower-div-2">
-    <div>
-    
-  <video autoplay muted loop playsinline id="anita-video">
-    <source src="photos/anitaedith-vid.mp4" type="video/mp4">
-  </video>
- 
-</div>
-    <div></div>
-</div>
-<hr>
-<div class="lower-div-3">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-</div>
-<div class="last-div-containing-copyright"></div>
-
-<button id="logout-button" class="logout-btn" style="display:none;">Logout</button>
-
-<script>
-if (!localStorage.getItem('token')) {
-    window.location.href = 'login.html';
-} else {
-    document.getElementById('logout-button').style.display = 'block';
-    document.getElementById('logout-button').onclick = function() {
-      localStorage.removeItem('token');
-      window.location.href = 'login.html';
-    };
-}
+  <div class="gallery-container">
+    <div class="gallery-title">Paragons 2023 Gallery</div>
+    <div class="gallery-grid" id="gallery-grid"></div>
+  </div>
+  <script>
+fetch('/photos')
+  .then(res => res.json())
+  .then(images => {
+    const grid = document.getElementById('gallery-grid');
+    if (!images.length) {
+      grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#003366;">No images uploaded yet.</p>';
+      return;
+    }
+    images.forEach(img => {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.innerHTML = `
+        <img src="photos/${img}" alt="${img}" class="gallery-img" loading="lazy">
+        <div class="gallery-caption">${img}</div>
+      `;
+      grid.appendChild(item);
+    });
+  })
+  .catch(() => {
+    document.getElementById('gallery-grid').innerHTML = '<p style="color:red;">Failed to load gallery images.</p>';
+  });
 </script>
 </body>
 </html>

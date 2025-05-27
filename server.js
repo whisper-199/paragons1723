@@ -261,6 +261,16 @@ app.post('/api/admin/upload-image', authenticateToken, requireAdmin, (req, res) 
     });
 });
 
+app.get('/photos', (req, res) => {
+  const dir = path.join(__dirname, 'public', 'photos');
+  fs.readdir(dir, (err, files) => {
+    if (err) return res.status(500).json({ error: 'Failed to list images' });
+    // Filter for image files only
+    const images = files.filter(f => /\.(jpg|jpeg|png|gif)$/i.test(f));
+    res.json(images);
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
