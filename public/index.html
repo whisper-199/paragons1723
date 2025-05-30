@@ -500,7 +500,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <button onclick="localStorage.removeItem('token'); window.location.href='login.html';">Logout</button>
-<div id="toast" style="display:none;position:fixed;bottom:30px;right:30px;background:#003366;color:#fff;padding:1em 2em;border-radius:8px;z-index:9999;"></div>
+<div id="toast"></div>
 <script>
 function showToast(msg) {
   const toast = document.getElementById('toast');
@@ -516,10 +516,10 @@ function showToast(msg) {
       <span>Paragons 2017-2023</span>
     </div>
     <div class="footer-social">
-      <a href="https://instagram.com/pra.isefrank" target="_blank" aria-label="Instagram">
+      <a href="https://instagram.com/pra.isefrank" target="_blank" rel="noopener" aria-label="Instagram">
         <i class="fab fa-instagram"></i>
       </a>
-      <a href="https://twitter.com/PARAGONS2017" target="_blank" aria-label="Twitter">
+      <a href="https://twitter.com/PARAGONS2017" target="_blank" rel="noopener" aria-label="Twitter">
         <i class="fab fa-twitter"></i>
       </a>
     </div>

@@ -20,6 +20,7 @@
         background: rgba(255,255,255,0.18);
         border-radius: 18px;
         box-shadow: 0 8px 32px 0 rgba(31,38,135,0.27);
+        -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
         padding: 2.5rem 2rem 2rem 2rem;
         color: #003366;
@@ -85,6 +86,9 @@
         margin-top: 0.5rem;
         transition: background 0.2s, color 0.2s;
       }
+      .logout-btn-margin {
+        margin-bottom: 10px;
+      }
       .register-btn:hover, .logout-btn:hover {
         background: linear-gradient(90deg, #FFD700 10%, #003366 100%);
         color: #003366;
@@ -144,12 +148,20 @@
           align-items: center;
         }
       }
+      .gallery-label {
+        display: block;
+        margin-bottom: 0.3rem;
+      }
+      .all-user-cards-title {
+        text-align: center;
+        color: #003366;
+      }
     </style>
 </head>
-<body>
+    <button onclick="logout()" class="logout-btn logout-btn-margin">Logout</button>
   <div class="register-container">
     <h2>Admin Dashboard</h2>
-    <button onclick="logout()" class="logout-btn" style="margin-bottom:10px;">Logout</button>
+    <button onclick="logout()" class="logout-btn logout-btn-margin">Logout</button>
     <h3>Reset User Password</h3>
     <form id="reset-password-form">
       <input type="email" id="reset-email" placeholder="User Email" required>
@@ -163,18 +175,19 @@
       <textarea id="announcement-message" placeholder="Write announcement..." required></textarea>
       <button type="submit" class="register-btn">Post</button>
       <div id="announcement-status"></div>
-    </form>
+      <label for="gallery-image" class="gallery-label">Select Image to Upload</label>
 
     <h3>Upload Gallery Image</h3>
     <form id="gallery-upload-form" enctype="multipart/form-data">
-      <input type="file" id="gallery-image" accept="image/*" required>
+      <label for="gallery-image" class="gallery-label">Select Image to Upload</label>
+      <input type="file" id="gallery-image" accept="image/*" required title="Choose an image file to upload" placeholder="Choose image file">
       <input type="text" id="gallery-filename" placeholder="Image filename (e.g. newphoto.jpg)" required>
       <button type="submit" class="register-btn">Upload</button>
-      <div id="gallery-upload-status"></div>
+  <h3 class="all-user-cards-title">All User Cards</h3>
     </form>
   </div>
 
-  <h3 style="text-align:center; color:#003366;">All User Cards</h3>
+  <h3 class="all-user-cards-title">All User Cards</h3>
   <div class="admin-cards-container" id="admin-cards-container">
     <!-- Cards will be loaded here -->
   </div>

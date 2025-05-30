@@ -24,6 +24,7 @@
         background: rgba(255,255,255,0.12);
         border-radius: 18px;
         box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+        -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
         padding: 2.5rem 2rem 2rem 2rem;
         color: #fff;
@@ -120,6 +121,14 @@
       .logout-btn:hover {
         background: #ff1a1a;
       }
+      .logout-btn-float {
+        float: right;
+        margin-bottom: 10px;
+        display: none;
+      }
+      #logout-button.logout-btn-float {
+        display: none;
+      }
       #toast {
         display: none;
         position: fixed;
@@ -131,12 +140,18 @@
         border-radius: 8px;
         z-index: 9999;
       }
+      #photo-preview {
+        display: none;
+        max-width: 120px;
+        border-radius: 8px;
+        margin-top: 10px;
+      }
     </style>
-</head>
+    <button id="logout-button" class="logout-btn logout-btn-float">Logout</button>
 <body>
   <div class="register-container">
-    <h2><i class="fa-solid fa-user-plus"></i> Create Your Profile</h2>
-    <button id="logout-button" class="logout-btn" style="float:right; margin-bottom:10px; display:none;">Logout</button>
+    <button id="logout-button" class="logout-btn logout-btn-float">Logout</button>
+    <button id="logout-button" class="logout-btn logout-btn-float">Logout</button>
     <form id="profile-form" enctype="multipart/form-data">
       <div class="form-group">
         <label for="full-name">Full Name</label>
@@ -160,13 +175,13 @@
       </div>
       <div class="form-group">
         <label for="twitter">Twitter</label>
-        <input type="text" id="twitter" placeholder="e.g. username or @username">
+      <img id="photo-preview" src="" alt="Preview">
       </div>
       <div class="form-group">
         <label for="photo-file">Upload Photo</label>
         <input type="file" id="photo-file" accept="image/*">
       </div>
-      <img id="photo-preview" src="" alt="Preview" style="display:none;max-width:120px;border-radius:8px;margin-top:10px;">
+      <img id="photo-preview" src="" alt="Preview">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" id="email" required placeholder="Enter your email">

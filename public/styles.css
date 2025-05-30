@@ -18,6 +18,8 @@ border:none; position:relative; top:5vh; padding-top: 5%;
 padding-bottom: 2%; 
 margin-bottom: 4%; align-items: center;
 overflow: hidden; background: rgba(255, 255, 255, 0.2);
+-webkit-backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
 backdrop-filter: blur(10px); border-radius: 12px;
 border: 1px solid rgba(255, 255, 255, 0.3);
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1),
@@ -167,6 +169,7 @@ background-position: center; background-size: cover; background-repeat: no-repea
   display: flex;
   justify-content: space-around;
   background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px); 
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1),
@@ -424,10 +427,13 @@ color: white;
 
 /* GENERAL PAGE STYLE */
 :root {
-  --crimson: #A51C30;
-  --navy: #012169;
-  --gold: #FFD700;
-  --cream: #F9F6EE;
+  --primary: #4158D0;
+  --secondary: #C850C0;
+  --accent: #FFCC70;
+  --background: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+  --card-bg: rgba(255, 255, 255, 0.2);
+  --text-light: #fff;
+  --text-dark: #333;
 }
 
 
@@ -462,11 +468,14 @@ header {
 }
 
 .navbar {
+  background: rgba(65, 88, 208, 0.9);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 50px;
-  background-color: #002244;
 }
 
 .logo {
@@ -501,11 +510,13 @@ h1 {
 
 /* SEARCH BAR */
 #searchInput {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
   margin-top: 15px;
   padding: 12px 20px;
   width: 60%;
   max-width: 500px;
-  border: none;
   border-radius: 30px;
   font-size: 16px;
   outline: none;
@@ -513,7 +524,8 @@ h1 {
 }
 
 #searchInput:focus {
-  box-shadow: 0px 0px 10px #66a6ff;
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(255, 204, 112, 0.3);
 }
 
 /* CARD CONTAINER */
@@ -532,18 +544,17 @@ h1 {
   perspective: 1000px;
   border-radius: 15px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  background: var(--card-bg);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: transform 0.3s, box-shadow 0.3s;
-  border: 2px solid #ffffff33; /*white with a slice transparency */
-  border-radius: 15px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  border-color: var(--accent);
 }
 
 .inner-card {
@@ -578,7 +589,7 @@ h1 {
 }
 
 .back {
-  background: #003366;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
   color: white;
   transform: rotateY(180deg);
   display: flex;
@@ -626,19 +637,15 @@ h1 {
 }
 
 .social-link.whatsapp {
-  background-color: #25D366;
-}
-
-.social-link.whatsapp:hover {
-  background-color: #128C7E;
+  background: linear-gradient(45deg, #25D366, #128C7E);
 }
 
 .social-link.instagram {
-  background-color: #E1306C;
+  background: linear-gradient(45deg, #833AB4, #FD1D1D);
 }
 
-.social-link.instagram:hover {
-  background-color: #C13584;
+.social-link.twitter {
+  background: linear-gradient(45deg, #1DA1F2, #0077B5);
 }
 
 /* RESPONSIVE DESIGN */
@@ -682,6 +689,7 @@ flex-direction: column;
   border-radius: 15px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
   border: 3px solid #ffaffb33; /*white with a slice transparency */
@@ -773,7 +781,7 @@ color:yellow;}
   background: #fff;
 }
 .footer-social a {
-  color: #FFD700;
+  color: var(--accent);
   font-size: 1.7rem;
   margin: 0 0.5rem;
   transition: color 0.2s;
