@@ -11,6 +11,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
     <link rel="icon" href="photos/group.jpg" type="image/png">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SEKBC23TLD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SEKBC23TLD');
+</script>
 </head>
 <body>
 
@@ -31,8 +40,8 @@
     </header>
     <div class="hero-section">
       <div class="hero-content">
-        <h1>Welcome to the Paragons Family</h1>
-        <p>Connecting friends, sharing memories, and celebrating our journey together.</p>
+        <h1>WELCOME TO PARAGONS @ BSS 2017-2023 </h1>
+        <p>CONNECTING FRIENDS, SHARING MEMORIES, AND  CELEBRATING OUR  JOURNEY OGTHER .</p>
       </div>
     </div>
     <div class="container" id="cardContainer">
@@ -528,5 +537,19 @@ function showToast(msg) {
     </div>
   </div>
 </footer>
+<div id="quote-container"></div>
+
+<script>
+fetch('https://api.quotable.io/random')
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById('quote-container').innerHTML = `
+            <blockquote class="quote">
+                <p>"${data.content}"</p>
+                <footer>— ${data.author}</footer>
+            </blockquote>
+        `;
+    });
+</script>
   </body>
   </html>
